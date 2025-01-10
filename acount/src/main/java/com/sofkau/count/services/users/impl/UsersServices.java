@@ -3,7 +3,6 @@ package com.sofkau.count.services.users.impl;
 
 import com.sofkau.count.commons.users.dtos.entry.UserEntryDTO;
 import com.sofkau.count.commons.users.dtos.exit.UserExitDTO;
-import com.sofkau.count.exceptions.AlreadyExistsException;
 import com.sofkau.count.exceptions.NotFoundException;
 import com.sofkau.count.converters.users.IUserMapper;
 import com.sofkau.count.domain.users.model.User;
@@ -11,6 +10,10 @@ import com.sofkau.count.domain.users.repository.UsersRepository;
 import com.sofkau.count.services.users.IUsersServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UsersServices implements IUsersServices {
@@ -23,15 +26,17 @@ public class UsersServices implements IUsersServices {
 
 
     @Override
-    public void createUser(UserEntryDTO userDTO) {
+    public UserExitDTO getUserById(Integer id) {
+        User user = usersRepository.findById(id).orElseThrow(() -> new NotFoundException("User not Found"));
+        return iUserMapper.usertoUserExit(user);
+    }
 
-        usersRepository.findByDocument(userDTO.getDocument()).ifPresent(
-                u -> {
-                    throw new AlreadyExistsException("already exist an user with the same email");
-                });
-
-        usersRepository.save(iUserMapper.userEntryDTOtoUserCreate(userDTO));
-
+    @Override
+    public List<UserExitDTO> getUsers() {
+       ArrayList<User> users = usersRepository.findAllByOrderByIdAsc();
+       return users.stream()
+               .map(iUserMapper::usertoUserExit)
+               .collect(Collectors.toList());
     }
 
     @Override

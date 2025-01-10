@@ -6,12 +6,17 @@ import com.sofkau.count.commons.users.dtos.entry.UserEntryDTO;
 import com.sofkau.count.commons.users.dtos.exit.UserExitDTO;
 import org.springframework.http.ResponseEntity;
 
+
+import java.util.List;
+
 public interface IUsersController {
 
-    public ResponseEntity<Void> createUser(UserEntryDTO userDTO);
+    ResponseEntity<UserExitDTO> getUserById(Integer id);
 
-    public ResponseEntity<UserExitDTO> updateUser(UserEntryDTO userEntryDTO);
+    ResponseEntity<List<UserExitDTO>> getUsers();
 
-    public ResponseEntity<Void> deleteUser(Integer id);
+    ResponseEntity<UserExitDTO> updateUser(UserEntryDTO userEntryDTO);
+
+    ResponseEntity<Void> deleteUser(Integer id);
 
 }

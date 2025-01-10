@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/acounts")
+@RequestMapping("/api/v1/acounts")
 public class AcountsController implements IAcountsController {
 
 
