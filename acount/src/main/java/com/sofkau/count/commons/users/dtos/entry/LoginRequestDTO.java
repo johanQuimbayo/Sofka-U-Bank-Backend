@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class LoginRequestDTO {
 
     @NotNull

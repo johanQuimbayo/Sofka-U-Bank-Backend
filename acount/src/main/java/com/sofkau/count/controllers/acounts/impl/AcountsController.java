@@ -47,6 +47,6 @@ public class AcountsController implements IAcountsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteAcount(@Valid @PathVariable Integer id) {
         acountsServices.deleteAcount(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

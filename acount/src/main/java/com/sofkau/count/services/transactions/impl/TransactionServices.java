@@ -5,11 +5,11 @@ package com.sofkau.count.services.transactions.impl;
 import com.sofkau.count.commons.acounts.dtos.exit.AcountExitDTO;
 import com.sofkau.count.exceptions.NotFoundException;
 import com.sofkau.count.commons.transactions.dtos.entry.TransactionEntryDTO;
-import com.sofkau.count.converters.acounts.IAcountMapper;
-import com.sofkau.count.converters.transactions.ITransactionMapper;
-import com.sofkau.count.domain.acounts.model.Acount;
-import com.sofkau.count.domain.acounts.repository.AcountsRepository;
-import com.sofkau.count.domain.transactions.repository.TransactionsRepository;
+import com.sofkau.count.mappers.acounts.IAcountMapper;
+import com.sofkau.count.mappers.transactions.ITransactionMapper;
+import com.sofkau.count.data.acounts.model.Acount;
+import com.sofkau.count.data.acounts.repository.AcountsRepository;
+import com.sofkau.count.data.transactions.repository.TransactionsRepository;
 import com.sofkau.count.services.transactions.ITransactionsServices;
 
 import jakarta.transaction.Transactional;

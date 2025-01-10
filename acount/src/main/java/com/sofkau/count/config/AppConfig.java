@@ -1,7 +1,7 @@
 package com.sofkau.count.config;
 
 
-import com.sofkau.count.domain.users.repository.UsersRepository;
+import com.sofkau.count.data.users.repository.UsersRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

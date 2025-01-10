@@ -6,14 +6,14 @@ import com.sofkau.count.commons.auth.dtos.entry.AuthenticationRequest;
 import com.sofkau.count.commons.auth.dtos.exit.AuthenticationResponse;
 import com.sofkau.count.commons.users.dtos.entry.UserEntryDTO;
 import com.sofkau.count.config.JwtService;
-import com.sofkau.count.converters.users.IUserMapper;
-import com.sofkau.count.domain.users.repository.UsersRepository;
+import com.sofkau.count.mappers.users.IUserMapper;
+import com.sofkau.count.data.users.repository.UsersRepository;
 import com.sofkau.count.exceptions.AlreadyExistsException;
 import com.sofkau.count.services.auth.IAuthServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import com.sofkau.count.domain.users.model.User;
+import com.sofkau.count.data.users.model.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
