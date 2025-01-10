@@ -2,6 +2,7 @@ package com.sofkau.count.services.auth.impl;
 
 
 
+import com.sofkau.count.commons.auth.dtos.entry.AuthenticationRequest;
 import com.sofkau.count.commons.auth.dtos.exit.AuthenticationResponse;
 import com.sofkau.count.commons.users.dtos.entry.UserEntryDTO;
 import com.sofkau.count.config.JwtService;
@@ -51,11 +52,11 @@ public class AuthServices implements IAuthServices {
     }
 
     @Override
-    public AuthenticationResponse authenticate(UserEntryDTO userDTO) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getEmail(),
-                userDTO.getPassword()));
+    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
+                authenticationRequest.getPassword()));
 
-        var user = usersRepository.findByEmail(userDTO.getEmail())
+        var user = usersRepository.findByEmail(authenticationRequest.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         var jwtToken = jwtService.generateToken(user);
