@@ -54,6 +54,6 @@ public class UsersController implements IUsersController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteUser(@Valid @PathVariable Integer id) {
         iUsersServices.deleteUser(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
