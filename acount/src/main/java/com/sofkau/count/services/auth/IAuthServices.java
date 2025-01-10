@@ -8,5 +8,5 @@ public interface IAuthServices {
 
     AuthenticationResponse register(UserEntryDTO userDTO);
 
-    AuthenticationResponse authenticate(UserEntryDTO userDTO);
+    AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest);
 }

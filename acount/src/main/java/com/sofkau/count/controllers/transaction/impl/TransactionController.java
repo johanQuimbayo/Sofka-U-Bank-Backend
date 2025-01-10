@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/transaction")
+@RequestMapping("/api/v1/transaction")
 public class TransactionController implements ITransactionController {
 
 

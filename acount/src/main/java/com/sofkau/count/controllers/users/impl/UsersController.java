@@ -15,10 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/api/v1/users")
 public class UsersController implements IUsersController {
 
 
@@ -27,11 +29,17 @@ public class UsersController implements IUsersController {
 
 
     @Override
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> createUser(@Valid @RequestBody  UserEntryDTO userDTO) {
-         iUsersServices.createUser(userDTO);
-         return new ResponseEntity<>(HttpStatus.CREATED);
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<UserExitDTO> getUserById(@Valid @PathVariable Integer id) {
+        return ResponseEntity.ok(iUsersServices.getUserById(id));
+    }
+
+    @Override
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<UserExitDTO>> getUsers() {
+        return ResponseEntity.ok(iUsersServices.getUsers());
     }
 
     @Override

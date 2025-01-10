@@ -4,13 +4,17 @@ package com.sofkau.count.services.users;
 import com.sofkau.count.commons.users.dtos.exit.UserExitDTO;
 import com.sofkau.count.commons.users.dtos.entry.UserEntryDTO;
 
+import java.util.List;
+
 public interface IUsersServices {
 
 
-    public void createUser(UserEntryDTO userDTO);
+    UserExitDTO getUserById(Integer id);
 
-    public UserExitDTO updateUser(UserEntryDTO userEntryDTO);
+    List<UserExitDTO> getUsers();
 
-    public void deleteUser(Integer id);
+    UserExitDTO updateUser(UserEntryDTO userEntryDTO);
+
+    void deleteUser(Integer id);
 
 }
