@@ -4,14 +4,13 @@ package com.sofkau.count.services.users.impl;
 import com.sofkau.count.commons.users.dtos.entry.UserEntryDTO;
 import com.sofkau.count.commons.users.dtos.exit.UserExitDTO;
 import com.sofkau.count.exceptions.NotFoundException;
-import com.sofkau.count.converters.users.IUserMapper;
-import com.sofkau.count.domain.users.model.User;
-import com.sofkau.count.domain.users.repository.UsersRepository;
+import com.sofkau.count.mappers.users.IUserMapper;
+import com.sofkau.count.data.users.model.User;
+import com.sofkau.count.data.users.repository.UsersRepository;
 import com.sofkau.count.services.users.IUsersServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +32,7 @@ public class UsersServices implements IUsersServices {
 
     @Override
     public List<UserExitDTO> getUsers() {
-       ArrayList<User> users = usersRepository.findAllByOrderByIdAsc();
+       List<User> users = usersRepository.findAllByOrderByIdAsc();
        return users.stream()
                .map(iUserMapper::usertoUserExit)
                .collect(Collectors.toList());
