@@ -107,15 +107,14 @@ El sistema bancario permite manejar usuarios, cuentas bancarias y transacciones 
 - **POST:** Realizar un depósito.
 - **POST:** Realizar un retiro (validando fondos).
 
+    ## **Encontrara la colección para probar cada una de las API en la carpeta "documentación"**
+
 ---
 
 ## **Seguridad**
 - Contraseñas almacenadas usando **BCrypt**.
 - Autenticación y autorización implementadas con **Spring Security**.
 - Acceso a los endpoints protegido por roles y permisos.
-
-
-  ## **Encontrara la colección para probar cada una de las API en la carpeta "documentación"**
 
 ---
 
