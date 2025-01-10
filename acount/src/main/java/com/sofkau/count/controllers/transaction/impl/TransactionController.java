@@ -28,7 +28,7 @@ public class TransactionController implements ITransactionController {
 
 
     @Override
-    @PostMapping("/deposit")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AcountExitDTO> deposit(@Valid @RequestBody TransactionEntryDTO transactionEntryDTO) {
          return ResponseEntity.ok(iTransactionsServices.deposit(transactionEntryDTO));
