@@ -2,7 +2,6 @@ package com.sofkau.count.commons.users.dtos.entry;
 
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -25,7 +24,8 @@ public class UserEntryDTO implements Serializable {
     private String lastName;
 
     @NotNull
-    private String document;
+    private Integer document;
+
 
     private String address;
 
@@ -37,7 +37,7 @@ public class UserEntryDTO implements Serializable {
     private String email;
 
     @NotNull
-    @Min(8)
+    @Size(min = 8)
     private String password;
 
 }

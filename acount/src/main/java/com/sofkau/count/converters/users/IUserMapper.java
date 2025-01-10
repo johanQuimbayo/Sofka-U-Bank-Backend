@@ -7,7 +7,9 @@ import com.sofkau.count.domain.users.model.User;
 
 public interface IUserMapper {
 
-    public User mapUserEntryDTOtoUser(UserEntryDTO userEntryDTO);
+    public User userEntryDTOtoUserCreate(UserEntryDTO userEntryDTO);
 
-    public UserExitDTO mapUsertoUserExit(User user);
+    void userEntryDTOtoUserUpdate(User user, UserEntryDTO userEntryDTO);
+
+    public UserExitDTO usertoUserExit(User user);
 }

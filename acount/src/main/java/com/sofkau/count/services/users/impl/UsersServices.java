@@ -1,11 +1,10 @@
 package com.sofkau.count.services.users.impl;
 
 
-
 import com.sofkau.count.commons.users.dtos.entry.UserEntryDTO;
 import com.sofkau.count.commons.users.dtos.exit.UserExitDTO;
-import com.sofkau.count.commons.users.exceptions.AlreadyExistsException;
-import com.sofkau.count.commons.users.exceptions.NotFoundException;
+import com.sofkau.count.exceptions.AlreadyExistsException;
+import com.sofkau.count.exceptions.NotFoundException;
 import com.sofkau.count.converters.users.IUserMapper;
 import com.sofkau.count.domain.users.model.User;
 import com.sofkau.count.domain.users.repository.UsersRepository;
@@ -25,38 +24,35 @@ public class UsersServices implements IUsersServices {
 
     @Override
     public void createUser(UserEntryDTO userDTO) {
-        try {
-            usersRepository.findByDocument(userDTO.getDocument()).ifPresent(
-                    u -> { throw new AlreadyExistsException("already exist an user with the same email");});
 
-            User user = iUserMapper.mapUserEntryDTOtoUser(userDTO);
-            usersRepository.save(user);
+        usersRepository.findByDocument(userDTO.getDocument()).ifPresent(
+                u -> {
+                    throw new AlreadyExistsException("already exist an user with the same email");
+                });
 
-        }catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        usersRepository.save(iUserMapper.userEntryDTOtoUserCreate(userDTO));
+
     }
 
     @Override
     public UserExitDTO updateUser(UserEntryDTO userEntryDTO) {
-        try {
-            User user = usersRepository.findByDocument(
-                    userEntryDTO.getDocument()).orElseThrow(() -> new NotFoundException("User not Found"));
 
-            iUserMapper.mapUserEntryDTOtoUser(userEntryDTO);
-            usersRepository.save(user);
-            UserExitDTO UserExitDTO = iUserMapper.mapUsertoUserExit(user);
-            return UserExitDTO;
+        User user = usersRepository.findByDocument(
+                userEntryDTO.getDocument()).orElseThrow(() -> new NotFoundException("User not Found"));
 
-        }catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        iUserMapper.userEntryDTOtoUserUpdate(user, userEntryDTO);
+
+        usersRepository.save(user);
+        return iUserMapper.usertoUserExit(user);
+
     }
 
     @Override
     public void deleteUser(Integer id) {
-        usersRepository.findById(id).orElseThrow(() -> new NotFoundException("Can´t delete user if this doesn´t exist"));
-        deleteUser(id);
+        User user = usersRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Can´t delete user if this doesn´t exist")
+        );
+        usersRepository.delete(user);
 
     }
 }
