@@ -1,4 +1,4 @@
-package com.sofkau.count.commons.users.exceptions;
+package com.sofkau.count.exceptions;
 
 public class InvalidCredentialsException extends RuntimeException {
     public InvalidCredentialsException(String message) {

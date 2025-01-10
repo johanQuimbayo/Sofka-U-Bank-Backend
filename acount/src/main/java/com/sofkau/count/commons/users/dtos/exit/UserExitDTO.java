@@ -17,7 +17,7 @@ public class UserExitDTO implements Serializable {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String document;
+    private Integer document;
     private String address;
     private String phone;
     private String email;

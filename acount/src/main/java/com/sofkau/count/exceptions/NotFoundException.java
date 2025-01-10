@@ -1,4 +1,5 @@
-package com.sofkau.count.commons.users.exceptions;
+package com.sofkau.count.exceptions;
+
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

@@ -8,6 +8,7 @@ import com.sofkau.count.services.users.IUsersServices;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class UsersController implements IUsersController {
     @Override
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> createUser(@RequestBody @Valid UserEntryDTO userDTO) {
+    public ResponseEntity<Void> createUser(@Valid @RequestBody  UserEntryDTO userDTO) {
          iUsersServices.createUser(userDTO);
          return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -36,14 +37,14 @@ public class UsersController implements IUsersController {
     @Override
     @PutMapping()
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UserExitDTO> updateUser(@RequestBody @Valid UserEntryDTO userEntryDTO) {
+    public ResponseEntity<UserExitDTO> updateUser(@Valid @RequestBody  UserEntryDTO userEntryDTO) {
         return ResponseEntity.ok(iUsersServices.updateUser(userEntryDTO));
     }
 
     @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteUser(@PathVariable @Valid Integer id) {
+    public ResponseEntity<Void> deleteUser(@Valid @PathVariable Integer id) {
         iUsersServices.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
