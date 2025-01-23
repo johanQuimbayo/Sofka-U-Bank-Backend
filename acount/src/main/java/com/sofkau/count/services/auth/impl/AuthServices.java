@@ -6,6 +6,7 @@ import com.sofkau.count.commons.auth.dtos.entry.AuthenticationRequest;
 import com.sofkau.count.commons.auth.dtos.exit.AuthenticationResponse;
 import com.sofkau.count.commons.users.dtos.entry.UserEntryDTO;
 import com.sofkau.count.config.JwtService;
+import com.sofkau.count.exceptions.NotFoundException;
 import com.sofkau.count.mappers.users.IUserMapper;
 import com.sofkau.count.data.users.repository.UsersRepository;
 import com.sofkau.count.exceptions.AlreadyExistsException;
@@ -45,8 +46,9 @@ public class AuthServices implements IAuthServices {
 
         usersRepository.save(user);
 
-        var jwtToken = jwtService.generateToken(user);
+        String jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .userExitDTO(iUserMapper.usertoUserExit(user))
                 .token(jwtToken)
                 .build();
     }
@@ -56,11 +58,12 @@ public class AuthServices implements IAuthServices {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
                 authenticationRequest.getPassword()));
 
-        var user = usersRepository.findByEmail(authenticationRequest.getEmail())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = usersRepository.findByEmail(authenticationRequest.getEmail())
+                .orElseThrow(() -> new NotFoundException("User not found"));
 
-        var jwtToken = jwtService.generateToken(user);
+        String jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .userExitDTO(iUserMapper.usertoUserExit(user))
                 .token(jwtToken)
                 .build();
     }
